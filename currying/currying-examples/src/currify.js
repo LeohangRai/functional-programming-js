@@ -5,6 +5,9 @@
     - once all the arguments are proviced, it invokes the original function 'fn' with all the arguments and returns the result
 */
 function currify(fn) {
+  if (typeof fn !== 'function') {
+    throw new Error('Please provide a function');
+  }
   return function curried(...args) {
     if (args.length >= fn.length) {
       return fn(...args);
@@ -17,7 +20,7 @@ function currify(fn) {
 
 /*
   IMPORTANT NOTE:
-  The currify function implementation above will not work on callback functions that make use of the spread operator.
+  The 'currify' function implementation above will not work on callback functions that make use of the spread operator.
   This is because the 'fn.length' value of a function using spread operator (as the only parameter) will be 0.
 */
 
